@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LogProxyApi</name>
+    </assembly>
+    <members>
+        <member name="T:LogProxyApi.Controllers.MessageController">
+            <summary>
+            Endpoint to manage messages
+            </summary>
+        </member>
+        <member name="M:LogProxyApi.Controllers.MessageController.#ctor(LogProxyApi.Infrastructure.IMessageLogger,AutoMapper.IMapper)">
+            <summary>
+            Constructor of MessageController
+            </summary>
+            <param name="messageLogger">Interface to store and access messages</param>
+            <param name="mapper">DTO object mapper</param>
+        </member>
+        <member name="M:LogProxyApi.Controllers.MessageController.GetMessages">
+            <summary>
+            Get all stored messages
+            </summary>
+            <returns>List of stored messages</returns>
+        </member>
+        <member name="M:LogProxyApi.Controllers.MessageController.SendMessage(LogProxyApi.Entities.Message)">
+            <summary>
+            Store new message
+            </summary>
+            <param name="message">Message to be stored</param>
+            <returns>Stored message</returns>
+        </member>
+        <member name="T:LogProxyApi.Entities.LogMapperProfile">
+            <summary>
+            Profile for mapping log entites
+            </summary>
+        </member>
+        <member name="M:LogProxyApi.Entities.LogMapperProfile.#ctor">
+            <summary>
+            Constructor of LogMapperProfile
+            </summary>
+        </member>
+        <member name="T:LogProxyApi.Entities.Message">
+            <summary>
+            Message class
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Message.Id">
+            <summary>
+            Internal Identifier, will be set by API
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Message.Title">
+            <summary>
+            Message Title
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Message.Text">
+            <summary>
+            Message Content
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Message.ReceivedAt">
+            <summary>
+            Timestamp when the message was received, will be set by API
+            </summary>
+        </member>
+        <member name="T:LogProxyApi.Entities.MessageDTO">
+            <summary>
+            Data Transfer Object of Message Class
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.MessageDTO.Records">
+            <summary>
+            Records
+            </summary>
+        </member>
+        <member name="T:LogProxyApi.Entities.Record">
+            <summary>
+            Record Class
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Record.Fields">
+            <summary>
+            Fields of record
+            </summary>
+        </member>
+        <member name="T:LogProxyApi.Entities.Fields">
+            <summary>
+            Field Class
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Fields.Id">
+            <summary>
+            Record Id
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Fields.Summary">
+            <summary>
+            Record Summary
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Fields.Message">
+            <summary>
+            Record Message
+            </summary>
+        </member>
+        <member name="P:LogProxyApi.Entities.Fields.ReceivedAt">
+            <summary>
+            Timestamp when the record was received
+            </summary>
+        </member>
+        <member name="T:LogProxyApi.Infrastructure.AirTableLogger">
+            <summary>
+            Concrete implementation of AirTable
+            </summary>
+        </member>
+        <member name="M:LogProxyApi.Infrastructure.AirTableLogger.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor of AirTableLogger
+            </summary>
+            <param name="configuration">App Configuration</param>
+        </member>
+        <member name="M:LogProxyApi.Infrastructure.AirTableLogger.GetMessages">
+            <summary>
+            Get all stored messages
+            </summary>
+            <returns>Stored messages</returns>
+        </member>
+        <member name="M:LogProxyApi.Infrastructure.AirTableLogger.SendMessage(LogProxyApi.Entities.MessageDTO)">
+            <summary>
+            Store new message
+            </summary>
+            <param name="message">Message to be stored</param>
+            <returns>Stored message</returns>
+        </member>
+        <member name="T:LogProxyApi.Infrastructure.IMessageLogger">
+            <summary>
+            Interface of message store
+            </summary>
+        </member>
+        <member name="M:LogProxyApi.Infrastructure.IMessageLogger.SendMessage(LogProxyApi.Entities.MessageDTO)">
+            <summary>
+            Store new message
+            </summary>
+            <param name="message">Message to be stored</param>
+            <returns>Stored message</returns>
+        </member>
+        <member name="M:LogProxyApi.Infrastructure.IMessageLogger.GetMessages">
+            <summary>
+            Get all stored messages
+            </summary>
+            <returns>Stored messages</returns>
+        </member>
+        <member name="T:LogProxyApi.Middleware.AuthenticationMiddleware">
+            <summary>
+            Middleware to handle basic authentication
+            </summary>
+        </member>
+        <member name="M:LogProxyApi.Middleware.AuthenticationMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Contructor of AuthenticationMiddleware
+            </summary>
+            <param name="next">Next Handler</param>
+            <param name="configuration">App Configuration</param>
+        </member>
+        <member name="M:LogProxyApi.Middleware.AuthenticationMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Checks for basic authentication before proceeding with next tasks
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:LogProxyApi.Middleware.LoggerMiddleware">
+            <summary>
+            Middleware to handle basic logging
+            </summary>
+        </member>
+        <member name="M:LogProxyApi.Middleware.LoggerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor of LoggerMiddleware
+            </summary>
+            <param name="next">Next Handler</param>
+            <param name="loggerFactory">Logger Factory</param>
+        </member>
+        <member name="M:LogProxyApi.Middleware.LoggerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Wraps next handlers with basic logs
+            </summary>
+            <param name="context">HttpContext</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
